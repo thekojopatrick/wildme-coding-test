@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import Layout from "components/Layout";
 
 const Protected: NextPage = (): JSX.Element => {
-	const { status, data } = useSession();
+	const { status } = useSession();
 
 	useEffect(() => {
 		if (status === "unauthenticated") Router.replace("/login");
