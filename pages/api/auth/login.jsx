@@ -27,5 +27,5 @@ export default async function handler(req, res) {
 		res.status(429).json({ message: "The request has been rate limited.", rateLimitState: result });
 		return res.end();
 	}
-	res.status(200).json({ name: "Kojo Patrick", ipAddress: identifier, ...result });
+	res.status(200).json({ name: "Kojo Patrick", rateLimiter: { ipAddress: identifier, ...result } });
 }
