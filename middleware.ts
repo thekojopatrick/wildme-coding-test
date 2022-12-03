@@ -4,8 +4,14 @@ import { Redis } from "@upstash/redis";
 
 // Create a new ratelimiter,Create a new bucket,
 // that refills 5 tokens every 10 seconds and has a maximum size of 10.
+
+const redis = new Redis({
+	url: `${process.env.NEXT_PUBLIC_UPSTASH_REDIS_REST_URL}`,
+	token: `${process.env.NEXT_PUBLIC_UPSTASH_REDIS_REST_TOKEN}`,
+});
+
 const ratelimit = new Ratelimit({
-	redis: Redis.fromEnv(),
+	redis: redis,
 	limiter: Ratelimit.tokenBucket(5, "10 s", 10),
 });
 
