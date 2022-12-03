@@ -5,8 +5,13 @@ import FormErrorMessage from "components/InputField/FormMessage";
 import InputField from "components/InputField/InputField";
 import { Formik, Form } from "formik";
 import { signIn } from "next-auth/react";
-import formSchema from "./utils/Schema";
 import { useSession } from "next-auth/react";
+import * as Yup from "yup";
+
+const formSchema = Yup.object({
+	username: Yup.string().required("Username required").min(6, "Username too short").max(28, "Username too long!"),
+	password: Yup.string().required("Password required").min(6, "Password too short").max(28, "Password too long!"),
+});
 
 const LoginScreen = () => {
 	const { status } = useSession();
@@ -14,8 +19,6 @@ const LoginScreen = () => {
 	useEffect(() => {
 		if (status === "authenticated") Router.replace("/protected");
 	}, [status]);
-
-	console.log(status);
 
 	return (
 		<>
