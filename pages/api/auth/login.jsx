@@ -7,7 +7,8 @@ const redis = new Redis({
 	token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Create a new ratelimiter,Create a new bucket, that refills 5 tokens every 10 seconds and has a maximum size of 10.
+// Create a new ratelimiter,Create a new bucket, 
+// that refills 5 tokens every 10 seconds and has a maximum size of 5
 const ratelimit = new Ratelimit({
 	redis: redis,
 	limiter: Ratelimit.tokenBucket(5, "60 s", 5),
