@@ -5,7 +5,7 @@ import FormErrorMessage from "components/InputField/FormMessage";
 import InputField from "components/InputField/InputField";
 import { Formik, Form } from "formik";
 import { signIn } from "next-auth/react";
-import { formSchema } from "../../utils/Schema";
+import formSchema from "../../utils/Schema";
 import { useSession } from "next-auth/react";
 
 const LoginScreen = () => {
@@ -38,7 +38,7 @@ const LoginScreen = () => {
 				}}
 			>
 				{({ errors, touched }) => (
-					<div className="flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+					<div className="flex min-h-full flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 						<div className="w-full max-w-md space-y-8">
 							<div>
 								<img className="mx-auto h-24 w-auto" src="/wildme.png" alt="Your Company" />
