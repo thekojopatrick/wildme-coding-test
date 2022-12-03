@@ -2,7 +2,7 @@ import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
-// Create a new ratelimiter,Create a new bucket, 
+// Create a new ratelimiter,Create a new bucket,
 // that refills 5 tokens every 10 seconds and has a maximum size of 10.
 const ratelimit = new Ratelimit({
 	redis: Redis.fromEnv(),
@@ -19,9 +19,7 @@ export default async function middleware(request: NextRequest, event: NextFetchE
 	event.waitUntil(pending);
 
 	// if success validate user else redirect /api/blocked
-	const res = success
-		? validateaUser(basicAuth, NextResponse)
-		: NextResponse.redirect(new URL("/api/blocked", request.url));
+	const res = success ? NextResponse.next() : NextResponse.redirect(new URL("/api/blocked", request.url));
 
 	// set headers
 	res.headers.set("X-RateLimit-Limit", limit.toString());
@@ -29,18 +27,6 @@ export default async function middleware(request: NextRequest, event: NextFetchE
 	res.headers.set("X-RateLimit-Reset", reset.toString());
 
 	return res;
-}
-
-//Validating User Login
-function validateaUser(auth: any, NextResponse: any) {
-	if (auth) {
-		const authValue = auth.split(" ")[1];
-		const [user, pwd] = atob(authValue).split(":");
-
-		if (user === "username" && pwd === "password") {
-			return NextResponse.next();
-		}
-	}
 }
 
 //Protected /api/ routes

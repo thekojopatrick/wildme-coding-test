@@ -7,7 +7,7 @@ const redis = new Redis({
 	token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Create a new ratelimiter,Create a new bucket, 
+// Create a new ratelimiter,Create a new bucket,
 // that refills 5 tokens every 10 seconds and has a maximum size of 5
 const ratelimit = new Ratelimit({
 	redis: redis,
@@ -27,5 +27,5 @@ export default async function handler(req, res) {
 		res.status(429).json({ message: "The request has been rate limited.", rateLimitState: result });
 		return res.end();
 	}
-	res.status(200).json({ ipAddress: identifier, ...result });
+	res.status(200).json({ name: "Kojo Patrick", ipAddress: identifier, ...result });
 }
