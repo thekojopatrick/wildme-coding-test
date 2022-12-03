@@ -5,7 +5,7 @@ import FormErrorMessage from "components/InputField/FormMessage";
 import InputField from "components/InputField/InputField";
 import { Formik, Form } from "formik";
 import { signIn } from "next-auth/react";
-import { formSchema } from "utils/Schema";
+import { formSchema } from "../../utils/Schema";
 import { useSession } from "next-auth/react";
 
 const LoginScreen = () => {
